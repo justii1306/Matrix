@@ -11,4 +11,7 @@ public:
     matrix operator -=(matrix);
     matrix operator *=(matrix);
     //matrix copy();
+	void operator =();
+	bool operator ==();
+	friend std::ostream& operator <<(std::ostream &s, complex &b);
     };
