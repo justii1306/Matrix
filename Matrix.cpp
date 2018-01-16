@@ -25,7 +25,7 @@ matrix::matrix(){
 	block = new rcmatrix();
 }
 
-matrix::matrix(int nrows,int ncols,double var){
+matrix::matrix(unsigned int nrows, unsigned int ncols, double var){
     block = new rcmatrix(nrows,ncols,var);
 }
 
@@ -70,9 +70,8 @@ std::ostream & operator << (std::ostream & s, const matrix & matrix){
 	return s;
 }
 
-inline matrix operator * (const matrix& m1, const matrix& m2){
-	if(m1.block->cols != m2.bl
-    ock->rows)
+matrix operator * (const matrix& m1, const matrix& m2){
+	if(m1.block->cols != m2.block->rows)
 		throw WrongDim();
 
 	matrix newMatrix(m1.block->rows, m2.block->cols,0.0);
@@ -118,26 +117,26 @@ std::cout << "operator<<(std::ostream& o, const matrix::Cref& s1)\\n"<<std::endl
 	return o;
 }
 
-matrix operator +(matrix& m1,matrix& m2){
-    if((m1.block->rows!=m2.block->rows)&&(m1.block->columns!=m2.block->columns))
+matrix operator +(const matrix& m1, const matrix& m2){
+    if((m1.block->rows!=m2.block->rows)&&(m1.block->cols!=m2.block->cols))
 		throw WrongDim();
 
-    matrix result(m1.block->rows,m1.block->columns,0.0);
+    matrix result(m1.block->rows,m1.block->cols,0.0);
 
-	for(int i= ;i<result.block->rows;i++){
-		for(int j=0; j<result.block->columnss;j++){
+	for(int i=0; i<result.block->rows; i++){
+		for(int j=0; j<result.block->cols;j++){
 			result.block->data[i][j]=m1.block->data[i][j]+m2.block->data[i][j];}}
 
     return result;}
 
-matrix operator -(matrix& m1,matrix& m2){
-    if((m1.block->rows!=m2.block->rows)&&(m1.block->columns!=m2.block->columns))
+matrix operator -(const matrix& m1, const matrix& m2){
+    if((m1.block->rows!=m2.block->rows)&&(m1.block->cols!=m2.block->cols))
 		throw WrongDim();
 
-    matrix result(m1.block->rows,m1.block->columns,0.0);
+    matrix result(m1.block->rows,m1.block->cols,0.0);
 
-	for(int i= ;i<result.block->rows;i++){
-		for(int j=0; j<result.block->columnss;j++){
+	for(int i=0; i<result.block->rows; i++){
+		for(int j=0; j<result.block->cols; j++){
 			result.block->data[i][j]=m1.block->data[i][j]-m2.block->data[i][j];}}
 
     return result;}

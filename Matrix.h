@@ -23,10 +23,10 @@ class matrix{
 		double* operator[](unsigned int i )const;
 		matrix& operator=(const matrix& asOp);
 		matrix& operator=(double** co);
-		matrix operator +(matrix &, matrix &);
-		/*matrix operator +=;
-		matrix operator -;
-		matrix operator -=;
+		friend matrix operator +(const matrix&, const matrix&);
+		//matrix operator +=;
+		friend matrix operator -(const matrix&, const matrix&);
+		/*matrix operator -=;
 		matrix operator *=;
 		matrix operator *=;*/
 		~matrix();
@@ -86,8 +86,7 @@ struct matrix::rcmatrix{
 
 		for(unsigned int i=0;i<nrows;i++)
 			for(unsigned int j=0;j<ncols;j++)
-				if(i==j)this->data[i][j]=var;
-				else this->data[i][j]=0.0;
+				data[i][j]=var;
 
 		this->rows=nrows;
 		this->cols=ncols;
